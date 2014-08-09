@@ -1,0 +1,8 @@
+# Permissions for this plugin are as follows : ups.free (free usps for vips and staff), ups.prime (sold for free usps), ups.half (half priced usps)
+# costPerPackage defines how much sending a default package costs (per stack). - costForUPSPrime defines how much UPS Prime should cost.
+# costPerSpecific defines how much sending a specific stack costs (per stack). Currently, only the itemid works, not the byte after. (31:5 will not work)
+costForUPSPrime: 1000000
+costPerPackage: 25
+costPerSpecific:
+  '1': 100
+  '5': 200

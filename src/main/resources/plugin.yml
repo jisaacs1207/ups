@@ -1,0 +1,16 @@
+name: UPS
+main: io.github.jisaacs1207.ups.ups
+version: 1.0
+author: jisaacs1207
+website: http://fivekingdoms.net
+depend: [Vault]
+description: >
+             Send and receive items locally or from other servers!
+
+commands:
+   ups:
+      description: Send and receive items locally or from other servers!
+   send:
+      description: Sends an item out to retrieve later from the UPS!
+   receive:
+      description: Retrieves an item from the UPS!
