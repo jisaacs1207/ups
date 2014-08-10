@@ -10,7 +10,7 @@ description: >
 commands:
    ups:
       description: Send and receive items locally or from other servers!
-   send:
+   post:
       description: Sends an item out to retrieve later from the UPS!
    receive:
       description: Retrieves an item from the UPS!

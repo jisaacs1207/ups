@@ -66,10 +66,10 @@ public final class ups extends JavaPlugin{
 		if (args.length == 0) {
 			if (commandLabel.equalsIgnoreCase("ups")){
 				Player player = (Player)sender;
-				player.sendMessage(ChatColor.GOLD + "[" + ChatColor.DARK_PURPLE + "UPS" + ChatColor.GOLD + "] " +ChatColor.YELLOW + "Try /send or /receive!");
+				player.sendMessage(ChatColor.GOLD + "[" + ChatColor.DARK_PURPLE + "UPS" + ChatColor.GOLD + "] " +ChatColor.YELLOW + "Try /post or /receive!");
 				return true;
 			}
-			else if (commandLabel.equalsIgnoreCase("send")){
+			else if (commandLabel.equalsIgnoreCase("post")){
 				Player player = (Player)sender;
 				int passthrough = 0;
 				if (player.getInventory().getItemInHand().getTypeId() == 0){
@@ -166,7 +166,7 @@ public final class ups extends JavaPlugin{
 					}
 				}	
 			}
-			if (commandLabel.equalsIgnoreCase("send")){
+			if (commandLabel.equalsIgnoreCase("post")){
 				int pOnline = 0;
 				for(Player p : Bukkit.getOnlinePlayers()){
 					String receiver = p.getName();
@@ -178,7 +178,7 @@ public final class ups extends JavaPlugin{
 					Player player = (Player)sender;
 					player.sendMessage(ChatColor.GOLD + "[" + ChatColor.DARK_PURPLE + "UPS" + ChatColor.GOLD + "] " +ChatColor.YELLOW + "You are about to send your held item(s) to " + args[0] + ".");
 					player.sendMessage(ChatColor.GOLD + "[" + ChatColor.DARK_PURPLE + "UPS" + ChatColor.GOLD + "] " +ChatColor.YELLOW + "If you are sure you've got the name correct, type:");
-					player.sendMessage(ChatColor.GOLD + "[" + ChatColor.DARK_PURPLE + "UPS" + ChatColor.GOLD + "] " +ChatColor.LIGHT_PURPLE + "/send " + args[0] + " confirm");
+					player.sendMessage(ChatColor.GOLD + "[" + ChatColor.DARK_PURPLE + "UPS" + ChatColor.GOLD + "] " +ChatColor.LIGHT_PURPLE + "/post " + args[0] + " confirm");
 					return true;
 				}
 				else if(pOnline==0){
@@ -186,7 +186,7 @@ public final class ups extends JavaPlugin{
 					player.sendMessage(ChatColor.GOLD + "[" + ChatColor.DARK_PURPLE + "UPS" + ChatColor.GOLD + "] " +ChatColor.YELLOW + args[0] + " is offline or doesn't exist.");
 					player.sendMessage(ChatColor.GOLD + "[" + ChatColor.DARK_PURPLE + "UPS" + ChatColor.GOLD + "] " +ChatColor.YELLOW + "We can deliver to an offline player but if");
 					player.sendMessage(ChatColor.GOLD + "[" + ChatColor.DARK_PURPLE + "UPS" + ChatColor.GOLD + "] " +ChatColor.YELLOW + "you've misspelled the name, the item is lost!");
-					player.sendMessage(ChatColor.GOLD + "[" + ChatColor.DARK_PURPLE + "UPS" + ChatColor.GOLD + "] " +ChatColor.LIGHT_PURPLE + "To continue, type '/send " + args[0] + " offline'.");
+					player.sendMessage(ChatColor.GOLD + "[" + ChatColor.DARK_PURPLE + "UPS" + ChatColor.GOLD + "] " +ChatColor.LIGHT_PURPLE + "To continue, type '/post " + args[0] + " offline'.");
 					return true;
 				}
 			}
@@ -233,7 +233,7 @@ public final class ups extends JavaPlugin{
 			}
 		}
 		if (args.length == 2) {
-			if (commandLabel.equalsIgnoreCase("send")){
+			if (commandLabel.equalsIgnoreCase("post")){
 				if(args[1].equalsIgnoreCase("confirm")){
 					Player player = (Player)sender;
 					if (player.getInventory().getItemInHand().getTypeId() == 0){
@@ -256,7 +256,7 @@ public final class ups extends JavaPlugin{
 						player.sendMessage(ChatColor.GOLD + "[" + ChatColor.DARK_PURPLE + "UPS" + ChatColor.GOLD + "] " +ChatColor.YELLOW + args[0] + " is offline or doesn't exist.");
 						player.sendMessage(ChatColor.GOLD + "[" + ChatColor.DARK_PURPLE + "UPS" + ChatColor.GOLD + "] " +ChatColor.YELLOW + "We can deliver to an offline player but if");
 						player.sendMessage(ChatColor.GOLD + "[" + ChatColor.DARK_PURPLE + "UPS" + ChatColor.GOLD + "] " +ChatColor.YELLOW + "you've misspelled the name, the item is lost!");
-						player.sendMessage(ChatColor.GOLD + "[" + ChatColor.DARK_PURPLE + "UPS" + ChatColor.GOLD + "] " +ChatColor.LIGHT_PURPLE + "To continue, type '/send " + args[0] + " offline'.");
+						player.sendMessage(ChatColor.GOLD + "[" + ChatColor.DARK_PURPLE + "UPS" + ChatColor.GOLD + "] " +ChatColor.LIGHT_PURPLE + "To continue, type '/post " + args[0] + " offline'.");
 						return true;
 					}
 					String itemString = ItemStackUtils.deserialize(player.getInventory().getItemInHand());
