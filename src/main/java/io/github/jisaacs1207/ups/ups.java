@@ -76,22 +76,24 @@ public final class ups extends JavaPlugin{
 					player.sendMessage(ChatColor.GOLD + "[" + ChatColor.DARK_PURPLE + "UPS" + ChatColor.GOLD + "] " + ChatColor.YELLOW + "Air is too difficult to package! Hold something.");
 					return true;
 				}
-				for(String key : this.getConfig().getConfigurationSection("costPerSpecific").getKeys(true)) {
-					if(player.getInventory().getItemInHand().getTypeId()==Integer.valueOf(key)){
-						if(!econ.has(player.getName(), this.getConfig().getDouble("costPerSpecific." + key))){
+				if(!player.hasPermission("ups.free")){
+					for(String key : this.getConfig().getConfigurationSection("costPerSpecific").getKeys(true)) {
+						if(player.getInventory().getItemInHand().getTypeId()==Integer.valueOf(key)){
+							if(!econ.has(player.getName(), this.getConfig().getDouble("costPerSpecific." + key))){
+								player.sendMessage(ChatColor.GOLD + "[" + ChatColor.DARK_PURPLE + "UPS" + ChatColor.GOLD + "] " +ChatColor.YELLOW + "You don't have enough money to send that.");
+								return true;
+							}
+							econ.withdrawPlayer(player.getName(), this.getConfig().getDouble("costPerSpecific." + key));
+							passthrough=1;
+						}
+					}
+					if(passthrough==0){
+						if(!econ.has(player.getName(), this.getConfig().getDouble("costPerPackage"))){
 							player.sendMessage(ChatColor.GOLD + "[" + ChatColor.DARK_PURPLE + "UPS" + ChatColor.GOLD + "] " +ChatColor.YELLOW + "You don't have enough money to send that.");
 							return true;
 						}
-						econ.withdrawPlayer(player.getName(), this.getConfig().getDouble("costPerSpecific." + key));
-						passthrough=1;
+						econ.withdrawPlayer(player.getName(), this.getConfig().getDouble("costPerPackage"));
 					}
-				}
-				if(passthrough==0){
-					if(!econ.has(player.getName(), this.getConfig().getDouble("costPerPackage"))){
-						player.sendMessage(ChatColor.GOLD + "[" + ChatColor.DARK_PURPLE + "UPS" + ChatColor.GOLD + "] " +ChatColor.YELLOW + "You don't have enough money to send that.");
-						return true;
-					}
-					econ.withdrawPlayer(player.getName(), this.getConfig().getDouble("costPerPackage"));
 				}
 				String name = player.getName().toLowerCase();
 				String itemString = ItemStackUtils.deserialize(player.getInventory().getItemInHand());
@@ -269,22 +271,24 @@ public final class ups extends JavaPlugin{
 					String rName = args[0].toLowerCase();
 					Player player = (Player)sender;
 					int passthrough=0;
-					for(String key : this.getConfig().getConfigurationSection("costPerSpecific").getKeys(true)) {
-						if(player.getInventory().getItemInHand().getTypeId()==Integer.valueOf(key)){
-							if(!econ.has(player.getName(), this.getConfig().getDouble("costPerSpecific." + key))){
+					if(!player.hasPermission("ups.free")){
+						for(String key : this.getConfig().getConfigurationSection("costPerSpecific").getKeys(true)) {
+							if(player.getInventory().getItemInHand().getTypeId()==Integer.valueOf(key)){
+								if(!econ.has(player.getName(), this.getConfig().getDouble("costPerSpecific." + key))){
+									player.sendMessage(ChatColor.GOLD + "[" + ChatColor.DARK_PURPLE + "UPS" + ChatColor.GOLD + "] " +ChatColor.YELLOW + "You don't have enough money to send that.");
+									return true;
+								}
+								econ.withdrawPlayer(player.getName(), this.getConfig().getDouble("costPerSpecific." + key));
+								passthrough=1;
+							}
+						}
+						if(passthrough==0){
+							if(!econ.has(player.getName(), this.getConfig().getDouble("costPerPackage"))){
 								player.sendMessage(ChatColor.GOLD + "[" + ChatColor.DARK_PURPLE + "UPS" + ChatColor.GOLD + "] " +ChatColor.YELLOW + "You don't have enough money to send that.");
 								return true;
 							}
-							econ.withdrawPlayer(player.getName(), this.getConfig().getDouble("costPerSpecific." + key));
-							passthrough=1;
+							econ.withdrawPlayer(player.getName(), this.getConfig().getDouble("costPerPackage"));
 						}
-					}
-					if(passthrough==0){
-						if(!econ.has(player.getName(), this.getConfig().getDouble("costPerPackage"))){
-							player.sendMessage(ChatColor.GOLD + "[" + ChatColor.DARK_PURPLE + "UPS" + ChatColor.GOLD + "] " +ChatColor.YELLOW + "You don't have enough money to send that.");
-							return true;
-						}
-						econ.withdrawPlayer(player.getName(), this.getConfig().getDouble("costPerPackage"));
 					}
 					String itemString = ItemStackUtils.deserialize(player.getInventory().getItemInHand());
 					ArrayList<String> list = (ArrayList<String>) this.getConfig().getStringList(rName);
