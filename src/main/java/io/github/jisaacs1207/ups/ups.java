@@ -76,6 +76,12 @@ public final class ups extends JavaPlugin{
 					player.sendMessage(ChatColor.GOLD + "[" + ChatColor.DARK_PURPLE + "UPS" + ChatColor.GOLD + "] " + ChatColor.YELLOW + "Air is too difficult to package! Hold something.");
 					return true;
 				}
+				for(String key : this.getConfig().getConfigurationSection("bannedFromTransfer").getKeys(true)) {
+					if(player.getInventory().getItemInHand().getTypeId()==Integer.valueOf(key)){
+						player.sendMessage(ChatColor.GOLD + "[" + ChatColor.DARK_PURPLE + "UPS" + ChatColor.GOLD + "] " +ChatColor.YELLOW + "Sorry, that item is too dangerous for us to transport!");
+						return true;
+					}
+				}
 				if(!player.hasPermission("ups.free")){
 					for(String key : this.getConfig().getConfigurationSection("costPerSpecific").getKeys(true)) {
 						if(player.getInventory().getItemInHand().getTypeId()==Integer.valueOf(key)){

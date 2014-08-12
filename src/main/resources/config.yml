@@ -6,3 +6,6 @@ costPerPackage: 25
 costPerSpecific:
   '1': 100
   '5': 200
+bannedFromTransfer:
+  '666': true
+  '777': true
